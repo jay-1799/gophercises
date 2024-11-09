@@ -1,0 +1,36 @@
+# Binaries for programs and plugins
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+
+# Output of the go command
+/bin/
+/pkg/
+/dist/
+
+# Test binary
+*.out
+
+# Dependency directories (for example, vendor)
+vendor/
+
+# Go workspace and cache files
+go.work
+go.sum
+go.mod
+go.sum.tmp
+/.idea/
+/.vscode/
+/.DS_Store
+
+# OS generated files
+Thumbs.db
+*.DS_Store
+
+# Log files
+*.log
+
+# Local development tools
+.env
