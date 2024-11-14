@@ -4,11 +4,12 @@ import (
 	"cyoa"
 	"flag"
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
 	"os"
 	"strings"
-	"text/template"
+	// "text/template"
 )
 
 func main() {
