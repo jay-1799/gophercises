@@ -6,14 +6,14 @@ import (
 )
 
 type AI interface {
-	Bet() int
+	Bet(shuffled bool) int
 	Play(hand []deck.Card, dealer deck.Card) Move
 	Results(hand [][]deck.Card, dealer []deck.Card)
 }
 
 type dealerAI struct{}
 
-func (ai dealerAI) Bet() int {
+func (ai dealerAI) Bet(shuffled bool) int {
 	return 1
 }
 
@@ -36,15 +36,21 @@ func HumanAI() AI {
 
 type humanAI struct{}
 
-func (ai humanAI) Bet() int {
-	return 1
+func (ai humanAI) Bet(shuffled bool) int {
+	if shuffled {
+		fmt.Println("THe deck was just shuffled.")
+	}
+	fmt.Println("What would like to bet?")
+	var bet int
+	fmt.Scanf("%d\n, &bet")
+	return bet
 }
 
 func (ai humanAI) Play(hand []deck.Card, dealer deck.Card) Move {
 	for {
 		fmt.Println("Player:", hand)
 		fmt.Println("Dealer:", dealer)
-		fmt.Println("what will you do? (h)it, (s)tand")
+		fmt.Println("what will you do? (h)it, (s)tand, (d)ouble")
 		var input string
 		fmt.Scanf("%s\n", &input)
 		switch input {
@@ -52,6 +58,8 @@ func (ai humanAI) Play(hand []deck.Card, dealer deck.Card) Move {
 			return MoveHit
 		case "s":
 			return MoveStand
+		case "d":
+			return MoveDouble
 		default:
 			fmt.Println("Invalid Option:", input)
 		}
