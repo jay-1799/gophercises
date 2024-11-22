@@ -8,7 +8,7 @@ import (
 type AI interface {
 	Bet(shuffled bool) int
 	Play(hand []deck.Card, dealer deck.Card) Move
-	Results(hand [][]deck.Card, dealer []deck.Card)
+	Results(hands [][]deck.Card, dealer []deck.Card)
 }
 
 type dealerAI struct{}
@@ -26,7 +26,7 @@ func (ai dealerAI) Play(hand []deck.Card, dealer deck.Card) Move {
 
 }
 
-func (ai dealerAI) Results(hand [][]deck.Card, dealer []deck.Card) {
+func (ai dealerAI) Results(hands [][]deck.Card, dealer []deck.Card) {
 	//todo
 }
 
@@ -50,7 +50,7 @@ func (ai humanAI) Play(hand []deck.Card, dealer deck.Card) Move {
 	for {
 		fmt.Println("Player:", hand)
 		fmt.Println("Dealer:", dealer)
-		fmt.Println("what will you do? (h)it, (s)tand, (d)ouble")
+		fmt.Println("what will you do? (h)it, (s)tand, (d)ouble, s(p)lit")
 		var input string
 		fmt.Scanf("%s\n", &input)
 		switch input {
@@ -60,14 +60,19 @@ func (ai humanAI) Play(hand []deck.Card, dealer deck.Card) Move {
 			return MoveStand
 		case "d":
 			return MoveDouble
+		case "p":
+			return MoveSplit
 		default:
 			fmt.Println("Invalid Option:", input)
 		}
 	}
 }
 
-func (ai humanAI) Results(hand [][]deck.Card, dealer []deck.Card) {
+func (ai humanAI) Results(hands [][]deck.Card, dealer []deck.Card) {
 	fmt.Println("==FINAL HANDS==")
-	fmt.Println("Player:", hand)
+	fmt.Println("Player:")
+	for _, h := range hands {
+		fmt.Println(" ", h)
+	}
 	fmt.Println("Dealer:", dealer)
 }
