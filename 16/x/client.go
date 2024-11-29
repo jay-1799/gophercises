@@ -9,7 +9,7 @@ import (
 )
 
 func New(key, secret string) (*Client, error) {
-	client, err := twitterClient(key, secret)
+	client, err := xClient(key, secret)
 	if err != nil {
 		return nil, err
 	}
@@ -24,7 +24,7 @@ type Client struct {
 	client *http.Client
 }
 
-func twitterClient(key, secret string) (*http.Client, error) {
+func xClient(key, secret string) (*http.Client, error) {
 	req, err := http.NewRequest("POST", "https://api.x.com/oauth2/token",
 		strings.NewReader("grant_type=client_credentials"))
 	if err != nil {
